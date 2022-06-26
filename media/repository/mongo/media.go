@@ -27,6 +27,10 @@ func generateQueryFilterMedia(options map[string]interface{}) (bson.M, *moptions
 		query["_id"] = id
 	}
 
+	if brandownerID, ok := options["brandowner_id"].(int64); ok {
+		query["brandowner_id"] = brandownerID
+	}
+
 	if provider, ok := options["provider"].(string); ok {
 		query["provider"] = provider
 	}

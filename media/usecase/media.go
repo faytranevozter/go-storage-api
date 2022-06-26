@@ -19,6 +19,9 @@ func (u *uMedia) ListMedia(ctx context.Context, options domain.DefaultPayload) d
 	ctx, cancel := context.WithTimeout(ctx, u.contextTimeout)
 	defer cancel()
 
+	// should login
+	authData := *options.AuthData
+
 	query := options.Query
 	pageQuery := query.Get("page")
 	pageInt, _ := strconv.Atoi(pageQuery)
@@ -38,8 +41,9 @@ func (u *uMedia) ListMedia(ctx context.Context, options domain.DefaultPayload) d
 	offset := (page - 1) * limit
 
 	optionsRepo := map[string]interface{}{
-		"limit":  limit,
-		"offset": offset,
+		"brandowner_id": authData.ID,
+		"limit":         limit,
+		"offset":        offset,
 	}
 
 	if query.Get("type") != "" && helpers.InArrayString(query.Get("type"), domain.AvailableUploadType) {
@@ -82,11 +86,14 @@ func (u *uMedia) DetailMedia(ctx context.Context, options domain.DefaultPayload)
 	ctx, cancel := context.WithTimeout(ctx, u.contextTimeout)
 	defer cancel()
 
+	// should login
+	authData := *options.AuthData
 	ID := options.ID.(string)
 
 	mediaMongos, total, err := u.repoMongo.FetchMedia(ctx, map[string]interface{}{
-		"single": true,
-		"id":     ID,
+		"brandowner_id": authData.ID,
+		"single":        true,
+		"id":            ID,
 	})
 	if err != nil || total == 0 {
 		return helpers.ErrResp(http.StatusBadRequest, "media not found")
@@ -182,13 +189,14 @@ func (um *uMedia) UploadMedia(ctx context.Context, options domain.DefaultPayload
 	now := time.Now().UTC()
 	// default value
 	mediaMongo := domain.MediaMongo{
-		Title:       payload.Title,
-		Description: payload.Description,
-		Type:        typeDocument,
-		Provider:    payload.Provider,
-		PublicURL:   publicURL,
-		CreatedAt:   now,
-		UpdatedAt:   now,
+		BrandownerID: authData.ID,
+		Title:        payload.Title,
+		Description:  payload.Description,
+		Type:         typeDocument,
+		Provider:     payload.Provider,
+		PublicURL:    publicURL,
+		CreatedAt:    now,
+		UpdatedAt:    now,
 	}
 
 	if payload.Source == "upload" {
@@ -255,12 +263,15 @@ func (u *uMedia) UpdateMedia(ctx context.Context, options domain.DefaultPayload)
 	ctx, cancel := context.WithTimeout(ctx, u.contextTimeout)
 	defer cancel()
 
+	// should login
+	authData := *options.AuthData
 	ID := options.ID.(string)
 	payload := options.Payload.(domain.UpdateMedia)
 
 	mediaMongos, total, err := u.repoMongo.FetchMedia(ctx, map[string]interface{}{
-		"single": true,
-		"id":     ID,
+		"brandowner_id": authData.ID,
+		"single":        true,
+		"id":            ID,
 	})
 	if err != nil || total == 0 {
 		return helpers.ErrResp(http.StatusBadRequest, "media not found")
@@ -295,11 +306,14 @@ func (u *uMedia) DeleteMedia(ctx context.Context, options domain.DefaultPayload)
 	ctx, cancel := context.WithTimeout(ctx, u.contextTimeout)
 	defer cancel()
 
+	// should login
+	authData := *options.AuthData
 	ID := options.ID.(string)
 
 	mediaMongos, total, err := u.repoMongo.FetchMedia(ctx, map[string]interface{}{
-		"single": true,
-		"id":     ID,
+		"brandowner_id": authData.ID,
+		"single":        true,
+		"id":            ID,
 	})
 	if err != nil || total == 0 {
 		return helpers.ErrResp(http.StatusBadRequest, "media not found")

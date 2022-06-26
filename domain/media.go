@@ -35,6 +35,7 @@ var AllowedSort = []string{
 // Media data structure
 type Media struct {
 	ID                  primitive.ObjectID `json:"id"`
+	BrandownerID        int64              `json:"brandowner_id"`
 	Title               string             `json:"title"`
 	Description         string             `json:"description"`
 	Type                string             `json:"type"`
@@ -50,6 +51,7 @@ type Media struct {
 // MediaMongo data structure
 type MediaMongo struct {
 	ID                  primitive.ObjectID `json:"id" bson:"_id"`
+	BrandownerID        int64              `json:"brandowner_id" bson:"brandowner_id"`
 	Title               string             `json:"title" bson:"title"`
 	Description         string             `json:"description" bson:"description"`
 	Type                string             `json:"type" bson:"type"`
