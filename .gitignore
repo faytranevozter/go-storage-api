@@ -1,0 +1,6 @@
+.DS_Store
+.env
+storage-api
+server.log
+.vscode
+vendor
