@@ -15,6 +15,6 @@ type mongoRepo struct {
 func NewMongoRepo(db *mongo.Database) domain.MongoRepository {
 	return &mongoRepo{
 		db:              db,
-		mediaCollection: "xmedia",
+		mediaCollection: "media",
 	}
 }
