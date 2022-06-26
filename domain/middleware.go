@@ -17,6 +17,6 @@ type DefaultPayload struct {
 }
 
 type JWTPayload struct {
-	ID int64 `json:"id"`
+	ID int64 `json:"brandowner_id"`
 	jwt.StandardClaims
 }

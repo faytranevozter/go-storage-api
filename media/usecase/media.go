@@ -109,6 +109,9 @@ func (um *uMedia) UploadMedia(ctx context.Context, options domain.DefaultPayload
 	payload := options.Payload.(domain.UploadMediaRequest)
 	request := options.Request
 
+	// should login
+	authData := *options.AuthData
+
 	// validation
 	errValidation := make(map[string]string)
 
@@ -214,7 +217,7 @@ func (um *uMedia) UploadMedia(ctx context.Context, options domain.DefaultPayload
 			}
 			break
 		case domain.PROVIDER_CLOUDINARY:
-			dir := ""
+			dir := "brand-" + strconv.Itoa(int(authData.ID))
 			objName := strconv.Itoa(int(time.Now().Unix()))
 			uploadResp, err := um.repoCloudinary.UploadFile(ctx, file, dir, objName)
 			if err != nil {
