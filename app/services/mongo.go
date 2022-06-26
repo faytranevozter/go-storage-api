@@ -5,7 +5,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/google/martian/log"
+	"github.com/sirupsen/logrus"
 	"go.mongodb.org/mongo-driver/mongo"
 	"go.mongodb.org/mongo-driver/mongo/options"
 	"go.mongodb.org/mongo-driver/mongo/readpref"
@@ -20,19 +20,19 @@ func ConnectMongo(timeout time.Duration) *mongo.Database {
 	clientOptions.ApplyURI(uri)
 	client, err := mongo.NewClient(clientOptions)
 	if err != nil {
-		log.Error(err)
+		logrus.Error(err)
 		panic(err)
 	}
 
 	err = client.Connect(ctx)
 	if err != nil {
-		log.Error(err)
+		logrus.Error(err)
 		panic(err)
 	}
 
 	err = client.Ping(ctx, readpref.Primary())
 	if err != nil {
-		log.Error(err)
+		logrus.Error(err)
 		panic(err)
 	}
 
