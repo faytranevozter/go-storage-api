@@ -98,7 +98,7 @@ func (u *uMedia) DetailMedia(ctx context.Context, options domain.DefaultPayload)
 }
 
 func (um *uMedia) UploadMedia(ctx context.Context, options domain.DefaultPayload) domain.BaseResponse {
-	ctx, cancel := context.WithTimeout(ctx, um.contextTimeout)
+	ctx, cancel := context.WithTimeout(ctx, 5*time.Minute)
 	defer cancel()
 
 	var err error
@@ -214,7 +214,7 @@ func (um *uMedia) UploadMedia(ctx context.Context, options domain.DefaultPayload
 			}
 			break
 		case domain.PROVIDER_CLOUDINARY:
-			dir := helpers.CategoryByMime(typeDocument)
+			dir := ""
 			objName := strconv.Itoa(int(time.Now().Unix()))
 			uploadResp, err := um.repoCloudinary.UploadFile(ctx, file, dir, objName)
 			if err != nil {
