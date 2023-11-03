@@ -25,7 +25,7 @@ func NewGoogleBucketRepo() domain.GoogleBucketRepository {
 	var bucketName = os.Getenv("GOOGLE_BUCKET_NAME")
 	enabled, _ := strconv.ParseBool(os.Getenv("GOOGLE_BUCKET_ENABLED"))
 
-	encodedGAC := os.Getenv("GOOGLE_BUCKET_ENABLED")
+	encodedGAC := os.Getenv("GOOGLE_BUCKET_CREDS")
 	decodedGAC, _ := base64.StdEncoding.DecodeString(encodedGAC)
 	return &googleBucketRepo{
 		bucketName: bucketName,
