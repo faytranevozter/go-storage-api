@@ -13,7 +13,7 @@ require (
 	github.com/sirupsen/logrus v1.9.0
 	go.mongodb.org/mongo-driver v1.9.1
 	google.golang.org/api v0.114.0
-	gopkg.in/natefinch/lumberjack.v2 v2.0.0
+	gopkg.in/natefinch/lumberjack.v2 v2.2.1
 )
 
 require (
