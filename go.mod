@@ -7,7 +7,7 @@ require (
 	github.com/cloudinary/cloudinary-go/v2 v2.0.2
 	github.com/getsentry/sentry-go v0.13.0
 	github.com/gin-gonic/gin v1.9.1
-	github.com/golang-jwt/jwt/v4 v4.4.1
+	github.com/golang-jwt/jwt/v4 v4.5.1
 	github.com/gosimple/slug v1.12.0
 	github.com/joho/godotenv v1.4.0
 	github.com/sirupsen/logrus v1.8.1
