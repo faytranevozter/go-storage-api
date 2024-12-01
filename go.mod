@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	cloud.google.com/go/storage v1.28.1
-	github.com/cloudinary/cloudinary-go/v2 v2.0.2
+	github.com/cloudinary/cloudinary-go/v2 v2.9.0
 	github.com/getsentry/sentry-go v0.29.1
 	github.com/gin-gonic/gin v1.9.1
 	github.com/golang-jwt/jwt/v4 v4.5.1
@@ -23,7 +23,7 @@ require (
 	cloud.google.com/go/iam v0.13.0 // indirect
 	github.com/bytedance/sonic v1.9.1 // indirect
 	github.com/chenzhuoyu/base64x v0.0.0-20221115062448-fe3a3abad311 // indirect
-	github.com/creasty/defaults v1.5.1 // indirect
+	github.com/creasty/defaults v1.7.0 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.2 // indirect
 	github.com/gin-contrib/sse v0.1.0 // indirect
 	github.com/go-playground/locales v0.14.1 // indirect
